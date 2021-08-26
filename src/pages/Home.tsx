@@ -20,6 +20,14 @@ export function Home() {
 
   function handleToggleTaskDone(id: number) {
     const updatedTasks = tasks.map((task) => ({ ...task }));
+
+    updatedTasks.find((task) => {
+      if (task.id === id) {
+        task.done = !task.done;
+      }
+    });
+
+    setTasks(updatedTasks);
   }
 
   function handleRemoveTask(id: number) {
