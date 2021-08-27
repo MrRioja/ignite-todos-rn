@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 import { Header } from "../components/Header";
 import { Task, TasksList } from "../components/TasksList";
@@ -9,6 +9,15 @@ export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function handleAddTask(newTaskTitle: string) {
+    const taskAlreadyExists = tasks.find((task) => task.title === newTaskTitle);
+
+    if (taskAlreadyExists) {
+      return Alert.alert(
+        "Task already registered",
+        "You cannot register a task with a name already registered"
+      );
+    }
+
     const task = {
       id: new Date().getTime(),
       title: newTaskTitle,
@@ -16,6 +25,18 @@ export function Home() {
     } as Task;
 
     setTasks((oldState) => [...oldState, task]);
+  }
+
+  function handleEditTask(taskId: number, taskNewTitle: string) {
+    const updatedTasks = tasks.map((task) => ({ ...task }));
+
+    updatedTasks.find((task) => {
+      if (task.id === taskId) {
+        task.title = taskNewTitle;
+      }
+    });
+
+    setTasks(updatedTasks);
   }
 
   function handleToggleTaskDone(id: number) {
@@ -31,7 +52,25 @@ export function Home() {
   }
 
   function handleRemoveTask(id: number) {
-    setTasks((oldState) => oldState.filter((task) => task.id !== id));
+    Alert.alert(
+      "Remove item",
+      "Are you sure you want to remove this item?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            setTasks((oldState) => oldState.filter((task) => task.id !== id));
+          },
+        },
+        {
+          text: "No",
+          onPress: () => {
+            return;
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   }
 
   return (
@@ -42,6 +81,7 @@ export function Home() {
 
       <TasksList
         tasks={tasks}
+        editTask={handleEditTask}
         toggleTaskDone={handleToggleTaskDone}
         removeTask={handleRemoveTask}
       />
