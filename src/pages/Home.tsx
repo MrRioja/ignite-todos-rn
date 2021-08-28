@@ -22,7 +22,7 @@ export function Home() {
       id: new Date().getTime(),
       title: newTaskTitle,
       done: false,
-    } as Task;
+    };
 
     setTasks((oldState) => [...oldState, task]);
   }
@@ -30,11 +30,13 @@ export function Home() {
   function handleEditTask(taskId: number, taskNewTitle: string) {
     const updatedTasks = tasks.map((task) => ({ ...task }));
 
-    updatedTasks.find((task) => {
-      if (task.id === taskId) {
-        task.title = taskNewTitle;
-      }
-    });
+    const taskToBeUpdated = updatedTasks.find((task) => task.id === taskId);
+
+    if (!taskToBeUpdated) {
+      return;
+    }
+
+    taskToBeUpdated.title = taskNewTitle;
 
     setTasks(updatedTasks);
   }
@@ -58,15 +60,14 @@ export function Home() {
       [
         {
           text: "Yes",
+          style: "destructive",
           onPress: () => {
             setTasks((oldState) => oldState.filter((task) => task.id !== id));
           },
         },
         {
           text: "No",
-          onPress: () => {
-            return;
-          },
+          style: "cancel",
         },
       ],
       { cancelable: true }
