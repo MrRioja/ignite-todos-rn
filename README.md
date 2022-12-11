@@ -27,7 +27,19 @@ Projeto desenvolvido durante o bootcamp Ignite da RocketSeat na trilha de React 
 
 ## To.Do
 
-🚧 Em construção 🚧
+O To.Do é um app para gerenciamento de tarefas do dia-a-dia do usuário. Por possuir um proposito simples, isso é refletido nas funcionalidades e interface da aplicação, a qual conheceremos a seguir.
+
+Ao entrar na aplicação o usuário irá se deparar com a tela a seguir que contem um campo para cadastrar uma nova tarefa, no canto superior o total tarefas cadastradas e o conteúdo principal que é a lista de tarefas cadastradas:
+
+<img src="readme/home-empty.png" alt="" height="500" />
+
+A listagem de tarefas é bem simples como podemos ver na imagem abaixo, aonde cada tarefa conterá um checkbox antes de sua descrição para o usuário marca-la como concluída quando necessário, contem dois botões após a descrição para editar o titulo da tarefa ou até mesmo exclui-la da listagem:
+
+<img src="readme/home-with-tasks.png" alt="" height="500" />
+
+Essas são as funcionalidades do projeto e para ilustra-las com mais fidelidade deixo o GIF abaixo mostrando o app em funcionamento:
+
+<img src="readme/app-demo.gif" alt="" height="500" />
 
 ## Instalação
 
